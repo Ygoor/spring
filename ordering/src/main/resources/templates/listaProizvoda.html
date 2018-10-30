@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf Hello World Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/styles/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/styles/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header"></div>
+					<div>
+						<ul class="nav navbar-nav navbar-right">
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+        <div class="container">
+            <h2>Tablica proizvoda</h2>
+            <div class="row col-md-7 table-responsive">
+                <table id="customerTable" class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Naziv</th>
+                        <th>Cijena</th>
+                        <th>Dobavljač</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     
+				    <tr th:each="proizvod, rowStat : ${listaProizvoda}" th:style="${rowStat.odd} ? 'color: gray' : 'color: darkblue;'">
+				        <td><input type="radio" name="id" th:value="${proizvod.id}" /></td>
+				        <td th:text="${proizvod.name}"></td>
+				        <td th:text="${proizvod.price}"></td>
+				        <td th:text="${proizvod.supplier_id}"></td>
+				    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+		<div>
+			<input type="button" id="delete" value="delete" />
+		</div>
+		<div>
+			<input type="button" id="new" value="new" />
+		</div>
+	</div>
+
+
+</body>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$( document ).ready(function() {
+	$("#new").click(function() {
+        window.location.replace("noviProizvod");	
+	});
+	
+	$("#delete").click(function() {
+		$.ajax({
+	        url: "delete",
+	        type: "DELETE",
+	        data: $('input[name=id]:checked').val(),
+	        success: function(result) {
+	            window.location.replace("dohvatiProizvode");
+	        },
+	        error: function() {
+	            alert("--- Failure ---");
+	        }
+	    });
+	});
+
+});
+
+</script>
+</html>

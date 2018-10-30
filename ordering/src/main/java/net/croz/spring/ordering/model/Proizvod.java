@@ -2,7 +2,11 @@ package net.croz.spring.ordering.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -11,15 +15,20 @@ import javax.persistence.Table;
 public class Proizvod {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="dobavljac_id")
 	private Long supplier_id;
+	@OneToOne
+	@JoinColumn(name = "id")
+	private Dobavljac supplier;
 	@Column(name="naziv")
 	private String name;
 	@Column(name="mjera")
 	private String measure;
 	@Column(name="cijena")
 	private Long price;
+	
 	public Long getId() {
 		return id;
 	}

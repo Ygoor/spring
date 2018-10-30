@@ -3,6 +3,8 @@ package net.croz.spring.ordering.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,6 +18,9 @@ public class Stavke {
 	private String order_id;
 	@Column(name="proizvod_id")
 	private String product_id;
+	@OneToOne
+	@JoinColumn(name = "id")
+	private Proizvod product;
 	@Column(name="kolicina")
 	private String quantitiy;
 	@Column(name="cijena")

@@ -15,6 +15,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 //			.csrf().disable()
 //			.cors().disable()	
+			.logout()//default logout handling
+				.permitAll()//allow all as it will be accessed when user is not logged in anymore
+				.clearAuthentication(true)
+				.logoutUrl("logout")
+				.logoutSuccessUrl("http://www.index.hr")
+			.and()
 			.authorizeRequests()
 				.antMatchers("/styles/**").permitAll()
 				.antMatchers("/proizvod").hasRole("EDIT")			
@@ -28,11 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin()//enable form based authentication
 				.loginPage("/login")//use a custom login URI
 	         	.permitAll(true)//login URI can be accessed by anyone
-	         	.defaultSuccessUrl("/dohvatiProizvode")
-			.and()
-			.logout()//default logout handling
-				.permitAll()//allow all as it will be accessed when user is not logged in anymore
-				.logoutSuccessUrl("http://www.index.hr");//our new logout success url, we are not replacing other defaults.
+	         	.defaultSuccessUrl("/dohvatiProizvode");
+
 	}
 
 	@Override

@@ -15,12 +15,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 //			.csrf().disable()
 //			.cors().disable()	
-			.logout()//default logout handling
-				.permitAll()//allow all as it will be accessed when user is not logged in anymore
-				.clearAuthentication(true)
-				.logoutUrl("logout")
-				.logoutSuccessUrl("http://www.index.hr")
-			.and()
+//			.logout()//default logout handling
+//				.permitAll()//allow all as it will be accessed when user is not logged in anymore
+//				.clearAuthentication(true)
+//				.logoutUrl("logout")
+//				.logoutSuccessUrl("http://www.index.hr")
+//			.and()
 			.authorizeRequests()
 				.antMatchers("/styles/**").permitAll()
 				.antMatchers("/proizvod").hasRole("EDIT")			
